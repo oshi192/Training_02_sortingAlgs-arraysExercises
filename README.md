@@ -1,1 +1,0 @@
-# Training_02_sortingAlgs-arraysExercises
