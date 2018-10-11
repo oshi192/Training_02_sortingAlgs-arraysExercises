@@ -31,7 +31,7 @@ abstract public class Sorter {
     public static  int[] generateRandomArray(int arrayLength){
         int[] arrays = new int[arrayLength];
         for(int i = 0; i < arrayLength; i++){
-            arrays[i] = random.nextInt()%17-10;
+            arrays[i] = random.nextInt()%20-10;
         }
         return arrays;
     }

@@ -1,4 +1,3 @@
-import jdk.nashorn.internal.ir.WhileNode;
 import sort.Sorter;
 
 import java.util.Arrays;
@@ -29,6 +28,8 @@ public class ArraysActionsExercises {
         checkForDecrease();
         loopShiftToRight(4);
         printArray();
+        displayUniqueElements();
+        printIndexOf(5);
     }
 
     private static void printArray() {
@@ -128,6 +129,14 @@ public class ArraysActionsExercises {
         }
         System.out.println("even values to zero");
     }
+    private static void printIndexOf(int value){
+        System.out.println("indexes of value \"" + value + "\": ");
+        for (int i = 0; i < arrays.length; i++) {
+            if (  arrays[i] == value){
+                System.out.print(arrays[i]+" ");
+            }
+        }
+    }
 
     private static void withNotEvenIndexesToZero() {
         for (int i = 0; i < arrays.length; i++) {
@@ -185,7 +194,21 @@ public class ArraysActionsExercises {
         System.out.println("shift values to the right in " + value + " positions");
     }
 
-    //Вывести элементы, значения которых не равны значениям других элементов.
+    private static void displayUniqueElements() {
+        System.out.println("Unique elements: ");
+        for (int i = 0; i < arrays.length; i++) {
+            boolean isUnique = true;
+            for (int j = i; j < arrays.length; j++) {
+                if (arrays[i] == arrays[j]) {
+                    isUnique = false;
+                }
+            }
+            if (isUnique) {
+                System.out.print("[" + arrays[i] + "] ");
+            }
+        }
+        System.out.println();
+    }
 
     private static void notEqualsElements(int[] secondArrays) {
         boolean result = true;
@@ -244,8 +267,16 @@ public class ArraysActionsExercises {
     private static void reversePositiveValuesPosition() {
         int pointerA = 0;
         int pointerB = arrays.length - 1;
-        while(pointerA>pointerB) {
-            while()
+        while (pointerA > pointerB) {
+            while (pointerA > pointerB && arrays[pointerA] < 0) {
+                pointerA++;
+            }
+            while (pointerA > pointerB && arrays[pointerB] < 0) {
+                pointerB--;
+            }
+            int tmp = arrays[pointerA];
+            arrays[pointerA] = arrays[pointerB];
+            arrays[pointerB] = tmp;
         }
     }
 }
