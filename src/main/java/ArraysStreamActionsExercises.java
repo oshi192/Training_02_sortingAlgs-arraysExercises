@@ -1,9 +1,14 @@
 import sort.Sorter;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.IntStream;
 
-public class ArraysActionsExercises {
-    static int[] arrays = Sorter.generateRandomArray(25);
+
+public class ArraysStreamActionsExercises {
+    static Integer[] arrays = Sorter.generateRandomArray(new Integer(5));
+    static List<Integer> list = Arrays.asList(arrays);
 
     public static void main(String[] args) {
         printArray();
@@ -11,52 +16,48 @@ public class ArraysActionsExercises {
         findMaxElement();
         findMinElement();
         findMiddleAryphmeticElement();
-        findEqualsElementsValue(10);
-        findZeroElements();
-        findSmallerZeroElements();
+//        findEqualsElementsValue(10);
+//        findZeroElements();
+//        findSmallerZeroElements();
 //        multEachElements(10);
 //        printArray();
-        addIndexValueToElements();
-        printArray();
+//        addIndexValueToElements();
+//        printArray();
 //        evenValuesToZero();
 //        printArray();
 //        withNotEvenIndexesToZero();
 //        printArray();
-        findFirstPositiveValue();
-        findLastNegativeValue();
-        checkForIncrease();
-        checkForDecrease();
-        loopShiftToRight(4);
-        printArray();
-        displayUniqueElements();
-        printIndexOf(5);
+//        findFirstPositiveValue();
+//        findLastNegativeValue();
+//        checkForIncrease();
+//        checkForDecrease();
+//        loopShiftToRight(4);
+//        printArray();
+//        displayUniqueElements();
+//        printIndexOf(5);
     }
 
     private static void printArray() {
+        Arrays.stream(arrays).forEachOrdered(x -> System.out.print(x + " "));
+        System.out.println();
+        list.stream().forEachOrdered(x -> System.out.print(x + " "));
         System.out.println(Arrays.toString(arrays));
     }
 
     private static void sumElements() {
-        int sum = 0;
-        for (int i : arrays) {
-            sum += i;
-        }
-        System.out.println("sum = " + sum);
+        System.out.println("sum arrays = " + Arrays.stream(arrays).mapToInt(x -> x.intValue()).sum());
+        System.out.println("sum list = " + list.stream().mapToInt(x -> x).sum());
+
 //        Arrays.stream(arrays).sum();
 //        Arrays.stream(arrays).reduce();
-       // IntegerStrea
+        // IntegerStrea
     }
 
     private static void findMaxElement() {
-        int elementValue = arrays[0];
-        int elementIndex = 0;
-        for (int i = 0; i < arrays.length; i++) {
-            if (elementValue < arrays[i]) {
-                elementIndex = i;
-                elementValue = arrays[i];
-            }
-        }
-        System.out.println("maxValue : " + elementValue + " maxIndex : " + elementIndex);
+        IntStream.range(0, arrays.length)
+                .reduce((a, b) -> arrays[a] < arrays[b] ? b : a)
+                .isPresent(x -> System.out.println("index" + x + "max = " + arrays[x]));
+
     }
 
     private static void findMinElement() {
@@ -72,11 +73,10 @@ public class ArraysActionsExercises {
     }
 
     private static void findMiddleAryphmeticElement() {
-        int sum = 0;
-        for (int i : arrays) {
-            sum += i;
-        }
-        System.out.println("middle Aryphmetic value = " + sum * 1.0 / arrays.length);
+        Arrays.stream(arrays).mapToInt(x -> x.intValue()).average();
+        list.stream().mapToInt(x -> x).average();
+        float midd1 = (Arrays.stream(arrays).mapToInt(x -> x.intValue()).sum() * 1F) / arrays.length;
+        float midd2 = (list.stream().mapToInt(x -> x).sum() * 1F) / arrays.length;
     }
 
     private static void findEqualsElementsValue(int compareElement) {
@@ -132,11 +132,12 @@ public class ArraysActionsExercises {
         }
         System.out.println("even values to zero");
     }
-    private static void printIndexOf(int value){
+
+    private static void printIndexOf(int value) {
         System.out.println("indexes of value \"" + value + "\": ");
         for (int i = 0; i < arrays.length; i++) {
-            if (  arrays[i] == value){
-                System.out.print(arrays[i]+" ");
+            if (arrays[i] == value) {
+                System.out.print(arrays[i] + " ");
             }
         }
     }

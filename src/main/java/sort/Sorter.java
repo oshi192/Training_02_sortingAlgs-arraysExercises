@@ -35,6 +35,13 @@ abstract public class Sorter {
         }
         return arrays;
     }
+    public static  Integer[] generateRandomArray(Integer arrayLength){
+        Integer[] arrays = new Integer[arrayLength];
+        for(int i = 0; i < arrayLength; i++){
+            arrays[i] = random.nextInt()%20-10;
+        }
+        return arrays;
+    }
 
     public void printArray(){
         System.out.println(Arrays.toString(arrays));
